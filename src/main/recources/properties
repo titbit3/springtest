@@ -1,0 +1,3 @@
+filename_ru=questions_ru.csv
+filename_en=questions_en.csv
+available_languages=ru,en

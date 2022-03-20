@@ -8,22 +8,15 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="musicBean"
-          class="org.titov.spring.MusicFolder.GoodMusic">
+          class="ru.titov.spring.MusicFolder.GoodMusic">
     </bean>
     <bean id="musicBean1"
-          class="org.titov.spring.MusicFolder.BadMusic">
+          class="ru.titov.spring.MusicFolder.BadMusic">
     </bean>
     <bean id="musicPlayer"
-          class="org.titov.spring.MusicFolder.MusicPlayer">
+          class="ru.titov.spring.MusicFolder.MusicPlayer">
         <constructor-arg ref="musicBean"/>
     </bean>
 
-    <bean id="testBean"
-          class="org.titov.spring.TestBean">
-        <constructor-arg name="filename" value="questions_ru.csv"/>
-    </bean>
-    <bean id="quizBean"
-          class="org.titov.spring.Quiz">
-        <constructor-arg name="test" ref="testBean"/>
-    </bean>
+
 </beans>
