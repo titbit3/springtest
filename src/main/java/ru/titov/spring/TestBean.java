@@ -1,25 +1,34 @@
-package org.titov.spring;
+package ru.titov.spring;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import com.opencsv.CSVReader;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
-
+@Component
 public class TestBean implements Test {
     public List<Question> qlist;
     public Iterator<Question> iterator;
-    String filename;
-
-    public TestBean(String filename) {
-        this.filename = filename;
+    String filename_ru;
+    String filename_en;
+    String locale;
+    public TestBean(@Value("${filename_ru}") String filename_ru, @Value("${filename_en}") String filename_en) {
+        this.filename_ru = filename_ru;
+        this.filename_en = filename_en;
     }
 
-   public List<Question> ReadQuestions() {
+   public List<Question> ReadQuestions(String text) {
         List<Question> questions = new ArrayList<>();
-        Resource resource = new ClassPathResource(filename);
+       Resource resource = new ClassPathResource(filename_ru);
+
+        if(text.equals("en")) {
+            resource = new ClassPathResource(filename_en);
+        }
+
+
         try (CSVReader csvReader = new CSVReader(new FileReader(resource.getURI().getPath()))) {
             List<String[]> myEntries = csvReader.readAll();
             for (String[] s: myEntries) {
@@ -40,7 +49,7 @@ public class TestBean implements Test {
 
     public void load(){
         if (qlist == null || qlist.isEmpty()) {
-            qlist = ReadQuestions();
+
             iterator = qlist.iterator();
         }
     }

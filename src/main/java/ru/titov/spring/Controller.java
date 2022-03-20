@@ -1,4 +1,4 @@
-package org.titov.spring;
+package ru.titov.spring;
 
 public interface Controller {
 

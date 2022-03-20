@@ -1,15 +1,17 @@
-package org.titov.spring;
+package ru.titov.spring;
+
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
-
+@Component
 public class Quiz implements Controller{
     private static final String PASSED_TITLE = "ТЕСТ СДАН";
     private static final String FAILED_TITLE = "ТЕСТ НЕ СДАН";
     private static final String WRONG_INPUT_TITLE = "Ошибка ввода - ответ не засчитан";
    private Test test;
     private int count;
+    String text = "";
 private  Scanner scanner;
 
     public Quiz(Test test) {
@@ -17,9 +19,13 @@ private  Scanner scanner;
         scanner = new Scanner(System.in);
     }
 
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
     @Override
     public void start() {
-        String text = scanner.nextLine();
+         text = scanner.nextLine();
 
 
 
@@ -40,7 +46,7 @@ private  Scanner scanner;
             }
         }
 */
-        List<Question> questions  = test.ReadQuestions();
+        List<Question> questions  = test.ReadQuestions(text);
         for(Question q: questions) {
             System.out.println(q.getText());
             try {
